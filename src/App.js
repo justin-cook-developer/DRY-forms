@@ -39,7 +39,6 @@ function App() {
           <section className="section">
             <h2 className="has-text-centered subtitle">Update Todo</h2>
             <TodoForm
-              key={todoToUpdate.id}
               createOrUpdateTodo={updateTodo(todoToUpdate.id)}
               initialState={todoToUpdate}
             />

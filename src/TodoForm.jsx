@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const TodoForm = ({ createOrUpdateTodo, initialState = {} }) => {
-  const [text, setText] = useState(initialState.text ? initialState.text : "");
+  const [text, setText] = useState("");
   const [textError, setTextError] = useState("");
-  const [completed, setCompleted] = useState(
-    initialState.completed ? initialState.completed : false
-  );
+  const [completed, setCompleted] = useState(false);
+
+  // useEffect removes the need for a key attribute
+  // this is the better way to update the state
+  useEffect(() => {
+    // make sure we have a valid todo as initialState
+    // don't want to set undefined in the create form
+    if (initialState.id) {
+      setText(initialState.text);
+      setCompleted(initialState.completed);
+    }
+  }, [initialState]);
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
